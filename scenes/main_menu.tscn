@@ -17,7 +17,7 @@ position = Vector2(575.999, 324)
 scale = Vector2(4.50001, 648)
 texture = SubResource("GradientTexture1D_i827f")
 
-[node name="Tittle" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 offset_left = 248.0
 offset_top = 144.0
 offset_right = 893.0
