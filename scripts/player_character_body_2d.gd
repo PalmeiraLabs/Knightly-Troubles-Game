@@ -3,6 +3,9 @@ extends CharacterBody2D
 @export var speed = 300.0
 @export var jump_velocity = -400.0
 
+@onready var ap = $AnimationPlayer
+@onready var sprite = $Sprite2D
+
 #To make it move.
 func _physics_process(delta: float) -> void:
 	print("Executing physics process")
@@ -18,9 +21,24 @@ func _physics_process(delta: float) -> void:
 	var horizontal_direction := Input.get_axis("move_left", "move_right")
 	if horizontal_direction:
 		velocity.x = horizontal_direction * speed
+		sprite.flip_h = (horizontal_direction == -1)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
 	
+	update_animations(horizontal_direction)
+	
 	print(velocity)
+
+func update_animations(horizontal_direction):
+	if is_on_floor():
+		if horizontal_direction == 0:
+			ap.play("idle")
+		else:
+			ap.play("run")
+	else:
+		if velocity.y < 0:
+			ap.play("jump")
+		elif velocity.y > 0:
+			ap.play("fall")
