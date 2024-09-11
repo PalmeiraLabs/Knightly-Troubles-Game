@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b5v4hgl6dxlox" path="res://assets/textures/player1/_Jump.png" id="4_y0h7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alti0"]
-size = Vector2(95, 118)
+size = Vector2(16, 37)
 
 [sub_resource type="Animation" id="Animation_slvkr"]
 length = 0.001
@@ -288,12 +288,11 @@ texture = ExtResource("2_ovgkg")
 hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1.5, -62)
+position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_alti0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -38)
+position = Vector2(0, -80)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
