@@ -13,26 +13,26 @@ gradient = SubResource("Gradient_usah1")
 script = ExtResource("1_t503g")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(575.999, 324)
-scale = Vector2(4.50001, 648)
+position = Vector2(312, 176)
+scale = Vector2(2.5535, 367.703)
 texture = SubResource("GradientTexture1D_i827f")
 
 [node name="Title" type="Label" parent="."]
-offset_left = 248.0
-offset_top = 144.0
-offset_right = 893.0
-offset_bottom = 208.0
-theme_override_font_sizes/font_size = 44
+offset_left = -16.0
+offset_top = 32.0
+offset_right = 640.0
+offset_bottom = 93.0
+theme_override_font_sizes/font_size = 30
 text = "Untitled Platformer Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
 [node name="PlayButton" type="Button" parent="."]
-offset_left = 496.0
-offset_top = 328.0
-offset_right = 624.0
-offset_bottom = 392.0
+offset_left = 248.0
+offset_top = 168.0
+offset_right = 376.0
+offset_bottom = 232.0
 theme_override_font_sizes/font_size = 28
 text = "Play"
 
