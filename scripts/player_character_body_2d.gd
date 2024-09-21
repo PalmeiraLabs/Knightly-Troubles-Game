@@ -8,7 +8,6 @@ extends CharacterBody2D
 
 #To make it move.
 func _physics_process(delta: float) -> void:
-	print("Executing physics process")
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -28,8 +27,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	update_animations(horizontal_direction)
-	
-	print(velocity)
+
 
 func update_animations(horizontal_direction):
 	if is_on_floor():
@@ -42,3 +40,6 @@ func update_animations(horizontal_direction):
 			ap.play("jump")
 		elif velocity.y > 0:
 			ap.play("fall")
+			
+func deactivate_camara():
+	$Camera2D.enabled = false

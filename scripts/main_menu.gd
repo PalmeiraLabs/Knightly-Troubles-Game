@@ -39,6 +39,7 @@ func connected_to_server():
 	# Called when connected to server
 	print("Connected to server")
 	send_player_information.rpc_id(1, $PlayerName.text, multiplayer.get_unique_id())
+	GameManager.current_player = multiplayer.get_unique_id()
 	
 func connection_failed():
 	# Called only on client
@@ -67,6 +68,7 @@ func _on_host_button_button_down():
 		
 	multiplayer.multiplayer_peer = peer
 	send_player_information($PlayerName.text, multiplayer.get_unique_id())
+	GameManager.current_player = multiplayer.get_unique_id()
 	print("Waiting for players")
 	
 func _on_join_button_button_down():
@@ -75,5 +77,3 @@ func _on_join_button_button_down():
 	# Both hosts must have same compression
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
-	
-	pass # Replace with function body.
