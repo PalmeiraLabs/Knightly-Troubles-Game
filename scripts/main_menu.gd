@@ -14,6 +14,7 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 
 func _on_play_button_pressed():
+	# RPC must be called like this
 	start_game.rpc()
 	
 @rpc("any_peer", "call_local")
@@ -27,6 +28,7 @@ func peer_connected(id):
 	# Called when player connects
 	print("Player Connected " + str(id))
 	
+	
 func peer_disconnected(id):
 	# Called on server and client
 	# Called when player disconnects
@@ -36,11 +38,23 @@ func connected_to_server():
 	# Called only on client
 	# Called when connected to server
 	print("Connected to server")
+	send_player_information.rpc_id(1, $PlayerName.text, multiplayer.get_unique_id())
 	
 func connection_failed():
 	# Called only on client
 	# Called when connected to server
 	print("Connection Failed")
+
+@rpc("any_peer")
+func send_player_information(name, id):
+	if !GameManager.players.has(id):
+		GameManager.players[id] = {
+			"name" : name,
+			"id" : id
+		}
+	if multiplayer.is_server():
+		for i in GameManager.players:
+			send_player_information.rpc(GameManager.players[i].name, i)
 
 func _on_host_button_button_down():
 	peer = ENetMultiplayerPeer.new()
@@ -48,14 +62,17 @@ func _on_host_button_button_down():
 	if error != OK:
 		print("Error creating server: " + str(error))
 		return
+	# Both hosts must have same compression
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 		
 	multiplayer.multiplayer_peer = peer
+	send_player_information($PlayerName.text, multiplayer.get_unique_id())
 	print("Waiting for players")
 	
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(address, port)
+	# Both hosts must have same compression
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
 	
