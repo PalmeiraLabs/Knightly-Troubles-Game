@@ -8,6 +8,7 @@ func _ready():
 	for i in GameManager.players:
 		print(i)
 		var current_player = PlayerScene.instantiate()
+		current_player.name = str(GameManager.players[i].id)
 		add_child(current_player)
 		if GameManager.current_player != i:
 			current_player.deactivate_camara()
