@@ -25,8 +25,6 @@ The project will include the following macro-level components:
 
 - **Delivery and Presentation**: Preparing a game demo for the final course submission, along with a presentation to explain the design decisions and development process if required.
 
-### Getting Started
-
 ## Clone and open project
 * From the Terminal:
 
@@ -37,8 +35,6 @@ The project will include the following macro-level components:
 The repository can be downloaded via https instead: 
 
       git clone https://github.com/agustinpalmeira/taller2.git
-
-### Installing
 
 ## Installing Godot 4 on macOS
 
