@@ -48,3 +48,6 @@ func update_animations(horizontal_direction):
 			
 func deactivate_camara():
 	$Camera2D.enabled = false
+	
+func add_name(name):
+	$Name.text = name
