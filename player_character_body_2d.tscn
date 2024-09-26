@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xo3eircuwbda"]
+[gd_scene load_steps=14 format=3 uid="uid://xo3eircuwbda"]
 
 [ext_resource type="Script" path="res://scripts/player_character_body_2d.gd" id="1_v464x"]
 [ext_resource type="Texture2D" uid="uid://cx333qe5qopm" path="res://assets/textures/player1/_Idle.png" id="2_ovgkg"]
@@ -279,7 +279,13 @@ _data = {
 "run": SubResource("Animation_4q6kc")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0nmdg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="PlayerCharacterBody2D" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_v464x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -299,3 +305,16 @@ libraries = {
 "": SubResource("AnimationLibrary_w0yai")
 }
 autoplay = "idle"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0nmdg")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -42.0
+theme_override_font_sizes/font_size = 10
+text = "Hola"
+horizontal_alignment = 1
+vertical_alignment = 1

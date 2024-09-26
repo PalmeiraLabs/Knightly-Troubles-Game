@@ -6,9 +6,13 @@ extends CharacterBody2D
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
+func _ready():
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
 #To make it move.
 func _physics_process(delta: float) -> void:
-	print("Executing physics process")
+	if !$MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -28,8 +32,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	update_animations(horizontal_direction)
-	
-	print(velocity)
+
 
 func update_animations(horizontal_direction):
 	if is_on_floor():
@@ -42,3 +45,9 @@ func update_animations(horizontal_direction):
 			ap.play("jump")
 		elif velocity.y > 0:
 			ap.play("fall")
+			
+func deactivate_camara():
+	$Camera2D.enabled = false
+	
+func add_name(name):
+	$Name.text = name
