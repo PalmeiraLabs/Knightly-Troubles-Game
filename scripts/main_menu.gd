@@ -19,6 +19,7 @@ func _on_play_button_pressed():
 	
 @rpc("any_peer", "call_local")
 func start_game():
+	$AudioStreamPlayer.stop()
 	var scene = load(INITIAL_SCENE).instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
