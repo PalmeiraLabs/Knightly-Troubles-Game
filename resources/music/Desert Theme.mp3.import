@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bbdve2l3eclee"
+path="res://.godot/imported/Desert Theme.mp3-1fc0d3cc9bbfc42ac660ae5cb13b47e2.mp3str"
+
+[deps]
+
+source_file="res://resources/music/Desert Theme.mp3"
+dest_files=["res://.godot/imported/Desert Theme.mp3-1fc0d3cc9bbfc42ac660ae5cb13b47e2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
