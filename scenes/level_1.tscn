@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://m2750tcdrvwy"]
+[gd_scene load_steps=5 format=4 uid="uid://m2750tcdrvwy"]
 
 [ext_resource type="TileSet" uid="uid://7i4vmnpptjru" path="res://resources/TileSets/tiles.tres" id="1_pbo4c"]
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_0m278"]
+[ext_resource type="AudioStream" uid="uid://bu1ubd8t3mogx" path="res://resources/music/Dungeon Theme.mp3" id="4_3d0ew"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="4_m1lmy"]
 
 [node name="Level1" type="Node2D"]
@@ -33,3 +34,8 @@ motion_mirroring = Vector2(1018, 0)
 position = Vector2(364.58, 336.375)
 scale = Vector2(3.1813, 3.1813)
 texture = ExtResource("4_m1lmy")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3d0ew")
+volume_db = -20.0
+autoplay = true

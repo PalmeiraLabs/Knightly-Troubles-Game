@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctor6yldedycj"]
+[gd_scene load_steps=5 format=3 uid="uid://ctor6yldedycj"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_t503g"]
+[ext_resource type="AudioStream" uid="uid://cn6w2b5756mbr" path="res://resources/music/Intro Theme.mp3" id="2_b6b2o"]
 
 [sub_resource type="Gradient" id="Gradient_usah1"]
 offsets = PackedFloat32Array(0)
@@ -35,6 +36,11 @@ offset_right = 568.0
 offset_bottom = 208.0
 theme_override_font_sizes/font_size = 28
 text = "Play"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b6b2o")
+volume_db = -20.0
+autoplay = true
 
 [node name="HostButton" type="Button" parent="."]
 offset_left = 80.0

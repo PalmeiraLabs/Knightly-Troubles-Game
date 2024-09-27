@@ -28,13 +28,13 @@ The project will include the following macro-level components:
 ## Clone and open project
 * From the Terminal:
 
-      git clone git@github.com:agustinpalmeira/taller2.git
-      cd taller2
-      open project.godot
+	  git clone git@github.com:agustinpalmeira/taller2.git
+	  cd taller2
+	  open project.godot
 
 The repository can be downloaded via https instead: 
 
-      git clone https://github.com/agustinpalmeira/taller2.git
+	  git clone https://github.com/agustinpalmeira/taller2.git
 
 ## Installing Godot 4 on macOS
 
@@ -74,6 +74,9 @@ For the versions available, see the following tags: https://github.com/agustinpa
 
 The graphics are from this site: [https://aamatniekss.itch.io/fantasy-knight-free-pixelart-animated-character](https://aamatniekss.itch.io/fantasy-knight-free-pixelart-animated-character)
 
+## Music
+
+The music tracks are from this site: [https://opengameart.org/content/platformer-game-music-pack](https://opengameart.org/content/platformer-game-music-pack)
 
 ## Authors
 
