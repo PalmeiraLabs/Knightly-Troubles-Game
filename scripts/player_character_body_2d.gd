@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
+@export var attack_time = 0.7
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
@@ -42,26 +43,28 @@ func _physics_process(delta: float) -> void:
 func update_animations(horizontal_direction):
 	if is_on_floor():
 		if horizontal_direction == 0:
-			if ap.current_animation != "attack":
+			if !isAttacking():
 				ap.play("idle")
 		else:
-			if ap.current_animation != "attack":
+			if !isAttacking():
 				ap.play("run")
 	else:
 		if velocity.y < 0:
-			if ap.current_animation != "attack":
+			if !isAttacking():
 				ap.play("jump")
 		elif velocity.y > 0:
-			if ap.current_animation != "attack":
+			if !isAttacking():
 				ap.play("fall")
 				
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		ap.play("attack")
 		start_action_cooldown()
 		
+func isAttacking():
+	return ap.current_animation == "attack"
 
 func start_action_cooldown():
-	timer.wait_time = 0.7
+	timer.wait_time = attack_time
 	timer.one_shot = true
 	disable_input()
 	timer.start()
