@@ -2,17 +2,25 @@ extends CharacterBody2D
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
+@export var attack_time = 0.7
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
+@onready var timer: Timer = $Timer
+
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	timer.connect("timeout", Callable(self, "_on_timeout"))
 
 #To make it move.
 func _physics_process(delta: float) -> void:
 	if !$MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		return
+	
+	if not timer.is_stopped():
+		return
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -20,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
-
+	
 	# Get the input direction and handle the movement/deceleration.
 	var horizontal_direction := Input.get_axis("move_left", "move_right")
 	if horizontal_direction:
@@ -30,22 +38,46 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
-	
 	update_animations(horizontal_direction)
-
 
 func update_animations(horizontal_direction):
 	if is_on_floor():
 		if horizontal_direction == 0:
-			ap.play("idle")
+			if !isAttacking():
+				ap.play("idle")
 		else:
-			ap.play("run")
+			if !isAttacking():
+				ap.play("run")
 	else:
 		if velocity.y < 0:
-			ap.play("jump")
+			if !isAttacking():
+				ap.play("jump")
 		elif velocity.y > 0:
-			ap.play("fall")
-			
+			if !isAttacking():
+				ap.play("fall")
+				
+	if Input.is_action_just_pressed("attack") and is_on_floor():
+		ap.play("attack")
+		start_action_cooldown()
+		
+func isAttacking():
+	return ap.current_animation == "attack"
+
+func start_action_cooldown():
+	timer.wait_time = attack_time
+	timer.one_shot = true
+	disable_input()
+	timer.start()
+
+func disable_input():
+	set_process_input(false)
+
+func enable_input():
+	set_process_input(true)
+
+func _on_timeout():
+	enable_input()
+	
 func deactivate_camara():
 	$Camera2D.enabled = false
 	
