@@ -11,7 +11,7 @@
 size = Vector2(16, 37)
 
 [sub_resource type="Animation" id="Animation_slvkr"]
-length = 0.001
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -431,3 +431,5 @@ theme_override_font_sizes/font_size = 10
 text = "Hola"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
