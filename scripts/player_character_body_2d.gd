@@ -75,7 +75,7 @@ func disable_input():
 func enable_input():
 	set_process_input(true)
 
-func _on_ActionTimer_timeout():
+func _on_timeout():
 	enable_input()
 	
 func deactivate_camara():
