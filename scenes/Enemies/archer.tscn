@@ -218,6 +218,5 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_r3nbi")
-animation = &"run"
-frame = 7
-frame_progress = 0.718093
+animation = &"charge bow"
+frame_progress = 0.268864
