@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b3owxe6is5t07"]
+[gd_scene load_steps=37 format=3 uid="uid://b3owxe6is5t07"]
 
 [ext_resource type="Texture2D" uid="uid://di1dkw6kosbq8" path="res://assets/textures/Enemies/Skeleton/Skeleton enemy.png" id="1_045bc"]
 
@@ -256,10 +256,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Skeleton" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40ceg"]
+size = Vector2(16, 32)
+
+[node name="Skeleton" type="RigidBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4w05t")
 animation = &"hit"
 frame = 1
 frame_progress = 0.195574
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_40ceg")
