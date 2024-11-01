@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xo3eircuwbda"]
+[gd_scene load_steps=17 format=3 uid="uid://xo3eircuwbda"]
 
 [ext_resource type="Script" path="res://scripts/player_character_body_2d.gd" id="1_v464x"]
 [ext_resource type="Texture2D" uid="uid://cx333qe5qopm" path="res://assets/textures/player1/_Idle.png" id="2_ovgkg"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://b5v4hgl6dxlox" path="res://assets/textures/player1/_Jump.png" id="4_y0h7p"]
 [ext_resource type="Texture2D" uid="uid://bxjlwljyk5q4t" path="res://assets/textures/player1/_AttackCombo2hit.png" id="6_axdql"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2l7qg"]
+size = Vector2(40.2917, 42)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_alti0"]
-size = Vector2(16, 37)
+size = Vector2(29, 41)
 
 [sub_resource type="Animation" id="Animation_slvkr"]
 length = 0.6
@@ -70,7 +73,31 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(4, -21.5)]
+"values": [Vector2(-1, -20)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 19)]
 }
 
 [sub_resource type="Animation" id="Animation_qnlei"]
@@ -136,6 +163,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(4, -21.5)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2, 0.233333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 20), Vector2(37.1458, 18), Vector2(28.5, 20), Vector2(16.7083, 19.8333), Vector2(1, 19)]
+}
 
 [sub_resource type="Animation" id="Animation_7vofw"]
 resource_name = "fall"
@@ -199,7 +250,31 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -21.5)]
+"values": [Vector2(-2.5, -21.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 19)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vat67"]
@@ -263,7 +338,31 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -21.5)]
+"values": [Vector2(-1, -20.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 19)]
 }
 
 [sub_resource type="Animation" id="Animation_rrtgs"]
@@ -329,6 +428,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0, -21.5)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 19)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_4q6kc"]
 resource_name = "run"
@@ -381,6 +504,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.340723),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, -21.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 19)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D/WeaponArea2D/CollisionShape2D:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w0yai"]
 _data = {
@@ -406,8 +565,16 @@ position = Vector2(4, -40)
 texture = ExtResource("2_ovgkg")
 hframes = 10
 
+[node name="WeaponArea2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WeaponArea2D"]
+position = Vector2(-5, 19)
+shape = SubResource("RectangleShape2D_2l7qg")
+disabled = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, -21.5)
+visible = false
+position = Vector2(-1, -20)
 shape = SubResource("RectangleShape2D_alti0")
 
 [node name="Camera2D" type="Camera2D" parent="."]

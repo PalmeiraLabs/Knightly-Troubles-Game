@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var cs2D = $Sprite2D/WeaponArea2D/CollisionShape2D
 
 @onready var timer: Timer = $Timer
 
@@ -34,6 +35,13 @@ func _physics_process(delta: float) -> void:
 	if horizontal_direction:
 		velocity.x = horizontal_direction * speed
 		sprite.flip_h = (horizontal_direction == -1)
+		
+# Flip cs2D horizontally based on movement direction
+		if horizontal_direction == -1:
+			cs2D.scale.x = -1
+		else:
+			cs2D.scale.x = 1
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
