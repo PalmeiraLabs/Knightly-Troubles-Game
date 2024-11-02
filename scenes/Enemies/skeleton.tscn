@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b3owxe6is5t07"]
+[gd_scene load_steps=56 format=3 uid="uid://b3owxe6is5t07"]
 
 [ext_resource type="Texture2D" uid="uid://di1dkw6kosbq8" path="res://assets/textures/Enemies/Skeleton/Skeleton enemy.png" id="1_045bc"]
 [ext_resource type="Script" path="res://scripts/Enemies/skeleton.gd" id="1_j3yto"]
@@ -243,7 +243,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -380,15 +380,17 @@ size = Vector2(16, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_gx5c5"]
 radius = 256.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nckv"]
+size = Vector2(26, 32)
+
 [node name="Skeleton" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_j3yto")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4w05t")
-animation = &"walk"
-frame_progress = 0.683047
+animation = &"attack"
+frame_progress = 0.112148
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_40ceg")
@@ -397,11 +399,21 @@ shape = SubResource("RectangleShape2D_40ceg")
 wait_time = 3.0
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_gx5c5")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(21, 0)
+shape = SubResource("RectangleShape2D_6nckv")
+disabled = true
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
