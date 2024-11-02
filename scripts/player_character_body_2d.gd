@@ -8,7 +8,6 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var cs2D = $Sprite2D/WeaponArea2D/CollisionShape2D
 @onready var weaponArea = $Sprite2D/WeaponArea2D
-
 @onready var timer: Timer = $Timer
 
 func _ready():
@@ -62,7 +61,7 @@ func update_animations(horizontal_direction):
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		ap.play("attack")
 		start_action_cooldown()
-		
+
 func isAttacking():
 	return ap.current_animation == "attack"
 

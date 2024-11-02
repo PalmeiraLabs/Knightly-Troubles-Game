@@ -70,6 +70,8 @@ pickup={
 
 2d_physics/layer_1="walls"
 2d_physics/layer_2="players"
+2d_physics/layer_3="player_weapon"
+2d_physics/layer_4="enemies"
 
 [rendering]
 
