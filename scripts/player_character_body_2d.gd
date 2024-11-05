@@ -6,7 +6,8 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
-
+@onready var cs2D = $Sprite2D/WeaponArea2D/CollisionShape2D
+@onready var weaponArea = $Sprite2D/WeaponArea2D
 @onready var timer: Timer = $Timer
 
 func _ready():
@@ -34,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	if horizontal_direction:
 		velocity.x = horizontal_direction * speed
 		sprite.flip_h = (horizontal_direction == -1)
+		weaponArea.scale.x = -1 if horizontal_direction == -1 else 1
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
@@ -59,7 +61,7 @@ func update_animations(horizontal_direction):
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		ap.play("attack")
 		start_action_cooldown()
-		
+
 func isAttacking():
 	return ap.current_animation == "attack"
 
