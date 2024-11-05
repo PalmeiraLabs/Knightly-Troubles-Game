@@ -12,8 +12,8 @@ extends Node2D
 const INITIAL_SCENE = "res://world.tscn"
 
 # Server IP for LAN connection
-@export var address = ""#"192.168.1.36" 
-@export var port = 0#8900   # Port for server and client
+@export var address = "" 
+@export var port = 0   # Port for server and client
 @export var max_clients = 2  # Max clients that can connect
 var peer  # Holds the ENet multiplayer peer (server or client)
 
@@ -128,3 +128,12 @@ func _on_ip_adress_text_submitted(new_text: String) -> void:
 
 func _on_port_number_text_submitted(new_text: String) -> void:
 	self.port = int(new_text)
+
+func _on_default_ip_address_button_pressed() -> void:
+	self.address = "192.168.1.36"
+	self.ip_address_line_edit.text = self.address
+
+func _on_default_port_button_pressed() -> void:
+	var portNumber = "8900"
+	self.port = int(portNumber)
+	self.port_number_line_edit.text = portNumber
