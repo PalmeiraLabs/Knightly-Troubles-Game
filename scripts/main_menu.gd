@@ -1,6 +1,10 @@
 # Extends the functionality of a 2D node for multiplayer setup
 extends Node2D
 
+@onready var button_host = $HostButton
+@onready var button_join = $JoinButton
+@onready var button_play = $PlayButton
+
 # The scene file to be loaded when starting the game
 const INITIAL_SCENE = "res://world.tscn"
 
@@ -18,6 +22,8 @@ func _ready():
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
+	
+	self.disable_button(button_play)
 
 # Triggered when "Play" button is pressed by user
 func _on_play_button_pressed():
@@ -33,24 +39,35 @@ func start_game():
 	$AudioStreamPlayer.stop()
 	
 	self.addScene(INITIAL_SCENE)
-	self.hide()
+	#self.hide()
 
 # Loads the scene and creates an instance of it
 func addScene(sceneName):
 	var scene = load(sceneName).instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
+	
+func disable_button(theButton):
+	theButton.disabled = true
+	theButton.focus_mode = Control.FOCUS_NONE
+
+func enable_button(theButton):
+	theButton.disabled = false
+	theButton.focus_mode = Control.FOCUS_ALL
 
 func peer_connected(id):
+	self.enable_button(button_play)
 	print("Player Connected: " + str(id))
 
 # Called when a player disconnects from the server
 # The id parameter is the unique identifier of the disconnected peer (player)
 func peer_disconnected(id):
+	self.disable_button(button_play)
 	print("Player Disconnected: " + str(id))
 
 # Called only on the client when it successfully connects to the server
 func connected_to_server():
+	self.enable_button(button_play)
 	print("Connected to server")
 	# Send the player's name and unique ID to the server via an RPC
 	send_player_information.rpc_id(1, $PlayerName.text, multiplayer.get_unique_id())
@@ -58,6 +75,7 @@ func connected_to_server():
 
 # Called only on the client when the connection to the server fails
 func connection_failed():
+	self.disable_button(button_play)
 	print("Connection Failed")
 
 # This RPC function sends player information (name and ID) to all peers in the network
@@ -75,6 +93,7 @@ func send_player_information(name, id):
 # Triggered when the "Host" button is pressed by the user
 # This function sets up the server
 func _on_host_button_button_down():
+	self.disable_button(button_join)
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(port, max_clients)
 	if error != OK:
@@ -90,6 +109,7 @@ func _on_host_button_button_down():
 # Triggered when the "Join" button is pressed by the user
 # This function sets up the client to join a server
 func _on_join_button_button_down():
+	self.disable_button(button_host)
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(address, port)  # Ensure `address` is set to host’s IP on LAN
 	
