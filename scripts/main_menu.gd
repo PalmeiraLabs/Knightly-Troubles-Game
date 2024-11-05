@@ -5,12 +5,15 @@ extends Node2D
 @onready var button_join = $JoinButton
 @onready var button_play = $PlayButton
 
+@onready var port_number_line_edit = $PortNumber
+@onready var ip_address_line_edit = $IPAdress
+
 # The scene file to be loaded when starting the game
 const INITIAL_SCENE = "res://world.tscn"
 
 # Server IP for LAN connection
-@export var address = "192.168.1.36" 
-@export var port = 8900   # Port for server and client
+@export var address = ""#"192.168.1.36" 
+@export var port = 0#8900   # Port for server and client
 @export var max_clients = 2  # Max clients that can connect
 var peer  # Holds the ENet multiplayer peer (server or client)
 
@@ -119,3 +122,9 @@ func _on_join_button_button_down():
 	# Set the multiplayer peer to the client peer
 	multiplayer.multiplayer_peer = peer
 	print("Attempting connection to server at " + address + ":" + str(port))
+
+func _on_ip_adress_text_submitted(new_text: String) -> void:
+	self.address = new_text
+
+func _on_port_number_text_submitted(new_text: String) -> void:
+	self.port = int(new_text)

@@ -58,11 +58,28 @@ offset_bottom = 208.0
 text = "Join"
 
 [node name="PlayerName" type="LineEdit" parent="."]
-offset_left = 80.0
-offset_top = 248.0
-offset_right = 288.0
-offset_bottom = 296.0
+offset_left = 360.0
+offset_top = 260.0
+offset_right = 568.0
+offset_bottom = 292.0
+placeholder_text = "Player's name"
+
+[node name="IPAdress" type="LineEdit" parent="."]
+offset_left = 78.0
+offset_top = 237.0
+offset_right = 286.0
+offset_bottom = 268.0
+placeholder_text = "IP Address"
+
+[node name="PortNumber" type="LineEdit" parent="."]
+offset_left = 77.0
+offset_top = 292.0
+offset_right = 285.0
+offset_bottom = 323.0
+placeholder_text = "Port Number"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="button_down" from="HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="text_submitted" from="IPAdress" to="." method="_on_ip_adress_text_submitted"]
+[connection signal="text_submitted" from="PortNumber" to="." method="_on_port_number_text_submitted"]
