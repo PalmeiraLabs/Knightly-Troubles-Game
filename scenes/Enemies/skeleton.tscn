@@ -399,7 +399,6 @@ shape = SubResource("RectangleShape2D_40ceg")
 wait_time = 3.0
 
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
