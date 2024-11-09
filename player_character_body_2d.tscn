@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://xo3eircuwbda"]
+[gd_scene load_steps=18 format=3 uid="uid://xo3eircuwbda"]
 
 [ext_resource type="Script" path="res://scripts/player_character_body_2d.gd" id="1_v464x"]
 [ext_resource type="Texture2D" uid="uid://cx333qe5qopm" path="res://assets/textures/player1/_Idle.png" id="2_ovgkg"]
 [ext_resource type="Texture2D" uid="uid://ca0iajpob4flo" path="res://assets/textures/player1/_Fall.png" id="3_c22nm"]
 [ext_resource type="Texture2D" uid="uid://bq2fdyyrpc2ek" path="res://assets/textures/player1/_Run.png" id="3_rd7ak"]
+[ext_resource type="AudioStream" uid="uid://sqb4862dxsvb" path="res://resources/effects/outputconcat2x.mp3" id="4_g4vxe"]
 [ext_resource type="Texture2D" uid="uid://b5v4hgl6dxlox" path="res://assets/textures/player1/_Jump.png" id="4_y0h7p"]
 [ext_resource type="Texture2D" uid="uid://bxjlwljyk5q4t" path="res://assets/textures/player1/_AttackCombo2hit.png" id="6_axdql"]
 
@@ -187,6 +188,21 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(4, 20), Vector2(37.1458, 18), Vector2(28.5, 20), Vector2(16.7083, 19.8333), Vector2(1, 19)]
 }
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimationPlayer/AudioStreamPlayer2D")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_g4vxe")
+}],
+"times": PackedFloat32Array(0.0333334)
+}
+tracks/7/use_blend = true
 
 [sub_resource type="Animation" id="Animation_7vofw"]
 resource_name = "fall"
@@ -585,6 +601,8 @@ libraries = {
 "": SubResource("AnimationLibrary_w0yai")
 }
 autoplay = "idle"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AnimationPlayer"]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0nmdg")
