@@ -1,8 +1,14 @@
 extends CharacterBody2D
 
+class_name Player
+
 @export var speed = 300.0
 @export var jump_velocity = -400.0
 @export var attack_time = 0.7
+
+var health = 30
+@export var max_health = 30
+@export var health_min = 1
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
@@ -85,3 +91,21 @@ func deactivate_camara():
 	
 func add_name(name):
 	$Name.text = name
+	
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		health = 0
+		die()
+
+func die():
+#	ap.play("death")
+	disable_input()
+	await get_tree().create_timer(2.0).timeout
+	queue_free()  # Removes the player from the scene when he dies.
+
+func _on_hurt_box_body_entered(body):
+	self.take_damage(10)
+
+func _on_hurt_box_area_entered(area):
+	self.take_damage(10)

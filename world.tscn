@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx4q4ytaxjogt"]
+[gd_scene load_steps=5 format=3 uid="uid://dx4q4ytaxjogt"]
 
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="1_2e2cq"]
 [ext_resource type="PackedScene" uid="uid://xo3eircuwbda" path="res://player_character_body_2d.tscn" id="1_uwi1m"]
 [ext_resource type="PackedScene" uid="uid://m2750tcdrvwy" path="res://scenes/level_1.tscn" id="2_d4303"]
+[ext_resource type="PackedScene" uid="uid://b3owxe6is5t07" path="res://scenes/Enemies/skeleton.tscn" id="5_4mc88"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_2e2cq")
 PlayerScene = ExtResource("1_uwi1m")
 
 [node name="Level1" parent="." instance=ExtResource("2_d4303")]
+
+[node name="Skeleton" parent="Level1" instance=ExtResource("5_4mc88")]
 
 [node name="SpawnLocation" type="Node2D" parent="."]
 
