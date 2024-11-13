@@ -30,7 +30,6 @@ func _ready():
 	$DirectionTimer.start()
 	health = max_health
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not is_on_floor():
@@ -117,7 +116,6 @@ func _on_detection_area_body_entered(body):
 
 func _on_hurt_box_body_entered(body):
 	curr_state = State.HURT
-
 
 func _on_hurt_box_area_entered(area):
 	curr_state = State.HURT
