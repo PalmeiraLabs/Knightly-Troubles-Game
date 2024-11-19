@@ -29,6 +29,7 @@ var in_death_animation = false
 func _ready():
 	$DirectionTimer.start()
 	health = max_health
+	$Hitbox/AttackHitbox.connect("body_entered", Callable(self, "_on_attack_hitbox_body_entered"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -119,3 +120,9 @@ func _on_hurt_box_body_entered(body):
 
 func _on_hurt_box_area_entered(area):
 	curr_state = State.HURT
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	print("Skeleton: _on_attack_hitbox_body_entered")
+	# Check if the body is the player
+	if body.is_in_group("Player"):  
+		body.take_damage(10) 

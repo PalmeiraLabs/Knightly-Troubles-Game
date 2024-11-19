@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://xo3eircuwbda"]
+[gd_scene load_steps=19 format=3 uid="uid://xo3eircuwbda"]
 
 [ext_resource type="Script" path="res://scripts/player_character_body_2d.gd" id="1_v464x"]
 [ext_resource type="Texture2D" uid="uid://cx333qe5qopm" path="res://assets/textures/player1/_Idle.png" id="2_ovgkg"]
@@ -572,6 +572,9 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yl5g"]
+size = Vector2(26, 40)
+
 [node name="PlayerCharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_v464x")
@@ -621,3 +624,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="HurtBoxArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxArea"]
+position = Vector2(-1, -21)
+shape = SubResource("RectangleShape2D_8yl5g")
+
+[connection signal="area_entered" from="HurtBoxArea" to="." method="_on_area_entered"]
+[connection signal="body_entered" from="HurtBoxArea" to="." method="_on_hurt_box_area_body_entered"]
