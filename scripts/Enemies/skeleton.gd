@@ -27,6 +27,8 @@ var in_death_animation = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if $Player:
+		$Player.connect("player_freed", Callable(self, "_on_player_freed"))
 	$DirectionTimer.start()
 	health = max_health
 	$Hitbox/AttackHitbox.connect("body_entered", Callable(self, "_on_attack_hitbox_body_entered"))
@@ -48,13 +50,17 @@ func _process(delta):
 		State.HURT:
 			velocity.x = 0
 		State.CHASING:
-			if position.distance_to(tracked_player.position) < 40:
-				curr_state = State.ATTACKING
-				velocity = Vector2.ZERO
+			if is_instance_valid(tracked_player):
+				if position.distance_to(tracked_player.position) < 40:
+					curr_state = State.ATTACKING
+					velocity = Vector2.ZERO
+				else:
+					var dir_to_player = position.direction_to(tracked_player.position)
+					velocity.x = dir_to_player.x * tracking_speed
 			else:
-				var dir_to_player = position.direction_to(tracked_player.position)
-				velocity.x = dir_to_player.x * tracking_speed
-				
+				# Handle the case where the player no longer exists
+				curr_state = State.ROAMING
+				velocity.x = direction.x * idle_speed
 	handle_animation()
 	move_and_slide()
 
@@ -110,6 +116,11 @@ func handle_animation():
 func choose(array):
 	array.shuffle()
 	return array.front()
+
+func _on_player_freed():
+	print("Player has been freed. Resetting target or cleaning up references.")
+	# Handle cleanup, e.g.:
+	tracked_player = null  # Enemies stop tracking the player
 
 func _on_detection_area_body_entered(body):
 	curr_state = State.CHASING
