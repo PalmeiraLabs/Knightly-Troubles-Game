@@ -130,7 +130,7 @@ func _on_port_number_text_submitted(new_text: String) -> void:
 	self.port = int(new_text)
 
 func _on_default_ip_address_button_pressed() -> void:
-	self.address = "127.0.0.1"
+	self.address = "127.0.0.1"#"192.168.2.20"
 	self.ip_address_line_edit.text = self.address
 
 func _on_default_port_button_pressed() -> void:

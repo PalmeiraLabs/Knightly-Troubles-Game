@@ -17,6 +17,7 @@ var health = 30
 @onready var timer: Timer = $Timer
 
 func _ready():
+	add_to_group("Player")
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	timer.connect("timeout", Callable(self, "_on_timeout"))
 
@@ -93,19 +94,18 @@ func add_name(name):
 	$Name.text = name
 	
 func take_damage(amount: int):
+	print("Player: take_damage")
 	health -= amount
 	if health <= 0:
 		health = 0
 		die()
 
 func die():
-#	ap.play("death")
+	print("Player: the player has died! :(")
+	ap.play("death")
 	disable_input()
 	await get_tree().create_timer(2.0).timeout
 	queue_free()  # Removes the player from the scene when he dies.
 
-func _on_hurt_box_body_entered(body):
-	self.take_damage(10)
-
-func _on_hurt_box_area_entered(area):
-	self.take_damage(10)
+func _on_area_entered(area):
+	print("Player: _on_area_entered")
