@@ -6,9 +6,16 @@ class_name Player
 @export var jump_velocity = -400.0
 @export var attack_time = 0.7
 
-var health = 30
-@export var max_health = 30
+var health = 50
+@export var max_health = 50
 @export var health_min = 1
+
+var continues := 3 
+
+# Default Player spawn position
+var spawn_point: Vector2 = Vector2(100, 100)  
+
+signal player_freed
 
 @onready var ap = $AnimationPlayer
 @onready var sprite = $Sprite2D
@@ -101,11 +108,29 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	$Camera2D.get_parent().hide()
 	print("Player: the player has died! :(")
 	ap.play("death")
 	disable_input()
-	await get_tree().create_timer(2.0).timeout
-	queue_free()  # Removes the player from the scene when he dies.
+	continues -= 1
+
+	if continues > 0:
+		await get_tree().create_timer(2.0).timeout
+		respawn()
+	else:
+		print("Game Over: No continues left!")
+		emit_signal("player_freed")  # Notify other nodes
+		queue_free()
+		#emit_signal("game_over")
+
+func respawn():
+	print("Player: Respawning...")
+	health = max_health
+	position = spawn_point
+	$Camera2D.make_current()  # Detach the camera
+	$Camera2D.get_parent().show()  # Ensure the camera's parent node is visible
+	enable_input()
+	show()
 
 func _on_area_entered(area):
 	print("Player: _on_area_entered")
