@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+const GAME_OVER_SCENE = "res://scenes/game_over.tscn"
+
 @export var speed = 300.0
 @export var jump_velocity = -400.0
 @export var attack_time = 0.7
@@ -10,7 +12,7 @@ var health = 50
 @export var max_health = 50
 @export var health_min = 1
 
-var continues := 3 
+var continues := 0
 
 # Default Player spawn position
 var spawn_point: Vector2 = Vector2(100, 100)  
@@ -119,9 +121,21 @@ func die():
 		respawn()
 	else:
 		print("Game Over: No continues left!")
-		emit_signal("player_freed")  # Notify other nodes
+		emit_signal("player_freed") 
+		addScene(GAME_OVER_SCENE)
 		queue_free()
-		#emit_signal("game_over")
+		#hide_all_except("GameOver")
+
+func addScene(sceneName):
+	var scene = load(sceneName).instantiate()
+	get_tree().root.add_child(scene)
+	self.hide()
+
+func hide_all_except(except_node_name: String):
+	var root = get_tree().get_root()
+	for child in root.get_children():
+		if child.name != except_node_name and child is CanvasItem:
+			child.visible = false
 
 func respawn():
 	print("Player: Respawning...")

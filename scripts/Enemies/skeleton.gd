@@ -16,7 +16,7 @@ enum State {ROAMING, CHASING, ATTACKING, HURT, DEAD}
 
 var curr_state : State = State.ROAMING
 
-@export var damage_dealt = 1
+@export var damage_dealt = 10
 
 var tracked_player : CharacterBody2D = null
 
@@ -136,4 +136,4 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	print("Skeleton: _on_attack_hitbox_body_entered")
 	# Check if the body is the player
 	if body.is_in_group("Player"):  
-		body.take_damage(10) 
+		body.take_damage(damage_dealt)

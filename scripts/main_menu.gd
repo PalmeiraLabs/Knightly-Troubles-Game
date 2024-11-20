@@ -42,7 +42,6 @@ func start_game():
 	$AudioStreamPlayer.stop()
 	
 	self.addScene(INITIAL_SCENE)
-	#self.hide()
 
 # Loads the scene and creates an instance of it
 func addScene(sceneName):
