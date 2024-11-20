@@ -5,7 +5,6 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_player_spawns()
-		
 # For each player in GameManager will assign a spawn location
 func set_player_spawns():
 	var index = 0

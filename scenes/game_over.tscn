@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cepup6e6au6xu"]
+
+[node name="GameOver" type="Node2D"]
+position = Vector2(320, 180)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "GAME OVER.. LOSER!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
