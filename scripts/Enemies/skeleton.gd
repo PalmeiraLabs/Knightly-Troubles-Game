@@ -119,7 +119,6 @@ func choose(array):
 
 func _on_player_freed():
 	print("Player has been freed. Resetting target or cleaning up references.")
-	# Handle cleanup, e.g.:
 	tracked_player = null  # Enemies stop tracking the player
 
 func _on_detection_area_body_entered(body):
