@@ -12,7 +12,9 @@ var health = 50
 @export var max_health = 50
 @export var health_min = 1
 
-var continues := 0
+var continues := 2
+var is_dead_forever := false
+var is_dead := false
 
 # Default Player spawn position
 var spawn_point: Vector2 = Vector2(100, 100)  
@@ -103,6 +105,9 @@ func add_name(name):
 	$Name.text = name
 	
 func take_damage(amount: int):
+	if is_dead:
+		return
+	
 	print("Player: take_damage")
 	health -= amount
 	if health <= 0:
@@ -110,26 +115,42 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	if is_dead_forever or is_dead:
+		return
+	
+	is_dead = true
+	
+	ap.play("death") #add animation
+	disable_input()
 	$Camera2D.get_parent().hide()
 	print("Player: the player has died! :(")
-	ap.play("death")
-	disable_input()
-	continues -= 1
-
+	
 	if continues > 0:
+		continues -= 1
+		print("Respawning... Continues left:", continues)
 		await get_tree().create_timer(2.0).timeout
 		respawn()
 	else:
 		print("Game Over: No continues left!")
 		emit_signal("player_freed") 
+		is_dead_forever = true
+		remove_player()
 		addScene(GAME_OVER_SCENE)
-		queue_free()
-		#hide_all_except("GameOver")
+
+func remove_player():
+	print("Removing player" )
+	queue_free()
+
+func add_game_over_scene():
+	var scene = load(GAME_OVER_SCENE).instantiate()
+	get_tree().get_root().add_child(scene)
+	hide()
 
 func addScene(sceneName):
-	var scene = load(sceneName).instantiate()
-	get_tree().root.add_child(scene)
-	self.hide()
+	if $MultiplayerSynchronizer.is_multiplayer_authority():
+		var scene = load(sceneName).instantiate()
+		get_tree().root.add_child(scene)
+		self.hide()
 
 func hide_all_except(except_node_name: String):
 	var root = get_tree().get_root()
@@ -139,6 +160,7 @@ func hide_all_except(except_node_name: String):
 
 func respawn():
 	print("Player: Respawning...")
+	is_dead = false
 	health = max_health
 	position = spawn_point
 	$Camera2D.make_current()  # Detach the camera
