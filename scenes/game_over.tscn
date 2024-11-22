@@ -18,8 +18,8 @@ cache/0/50/0/scale = 1.0
 font = SubResource("FontFile_7qnyw")
 font_size = 50
 font_color = Color(0.227451, 0.0509804, 0.0627451, 1)
-shadow_size = 4
-shadow_color = Color(0.652227, 2.04556e-06, 1.44392e-07, 0)
+shadow_size = 15
+shadow_color = Color(1, 1, 1, 1)
 
 [node name="GameOver" type="Node2D"]
 position = Vector2(320, 180)
