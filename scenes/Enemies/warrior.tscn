@@ -433,8 +433,9 @@ collision_layer = 8
 script = ExtResource("1_6pkvr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_dhhkm")
-animation = &"run"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_40ceg")
