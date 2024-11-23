@@ -1,5 +1,6 @@
-[gd_scene load_steps=58 format=3 uid="uid://8igseu0l6rye"]
+[gd_scene load_steps=63 format=3 uid="uid://dek4u1rb2wp40"]
 
+[ext_resource type="Script" path="res://scripts/Enemies/warrior.gd" id="1_6pkvr"]
 [ext_resource type="Texture2D" uid="uid://doqpxoe7k8df1" path="res://assets/textures/Enemies/Warrior/NightBorne.png" id="1_bps2g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3ata"]
@@ -222,7 +223,7 @@ region = Rect2(320, 80, 80, 80)
 atlas = ExtResource("1_bps2g")
 region = Rect2(400, 80, 80, 80)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_p2mr1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_dhhkm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -415,9 +416,58 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Warrior" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40ceg"]
+size = Vector2(16, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gx5c5"]
+radius = 160.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nckv"]
+size = Vector2(26, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcqb2"]
+size = Vector2(16, 32)
+
+[node name="Warrior" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_6pkvr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_p2mr1")
-animation = &"hit"
-frame_progress = 0.0171066
+sprite_frames = SubResource("SpriteFrames_dhhkm")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_40ceg")
+
+[node name="DirectionTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_gx5c5")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(21, 0)
+shape = SubResource("RectangleShape2D_6nckv")
+disabled = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_hcqb2")
+
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
