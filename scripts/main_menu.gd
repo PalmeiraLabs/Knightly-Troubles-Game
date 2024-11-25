@@ -89,9 +89,28 @@ func connection_failed():
 @rpc("any_peer")
 func send_player_information(name, id):
 	# If the GameManager does not already have a record for this player ID, add it
+	var original_name = name
+	var counter = 1
+	
+	while true:
+		var name_exists = false
+		for player_id in GameManager.players:
+			if GameManager.players[player_id].name == name:
+				name_exists = true
+				break
+				
+		if name_exists:
+			name = original_name + str(counter)  # Append a number to the name
+			counter += 1
+		else:
+			break
+			
+	# Add the player with the unique name
 	if !GameManager.players.has(id):
 		GameManager.players[id] = { "name": name, "id": id }
-	# If this peer is the server, broadcast the player information to all connected clients		
+		print("Player added with name: " + name)
+		
+	# If this peer is the server, broadcast the player information to all connected clients
 	if multiplayer.is_server():
 		for i in GameManager.players:
 			send_player_information.rpc(GameManager.players[i].name, i)
