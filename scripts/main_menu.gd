@@ -72,7 +72,12 @@ func connected_to_server():
 	self.enable_button(button_play)
 	print("Connected to server")
 	# Send the player's name and unique ID to the server via an RPC
-	send_player_information.rpc_id(1, $PlayerName.text, multiplayer.get_unique_id())
+	
+	var player_name = "Player2"
+	if ($PlayerName.text != null and  $PlayerName.text != ""):
+		player_name = $PlayerName.text
+	
+	send_player_information.rpc_id(1, player_name, multiplayer.get_unique_id())
 	GameManager.current_player = multiplayer.get_unique_id()
 
 # Called only on the client when the connection to the server fails
@@ -103,7 +108,12 @@ func _on_host_button_button_down():
 		return
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = peer
-	send_player_information($PlayerName.text, multiplayer.get_unique_id())
+	
+	var player_name = "Player1"
+	if ($PlayerName.text != null and  $PlayerName.text != ""):
+		player_name = $PlayerName.text
+	
+	send_player_information(player_name, multiplayer.get_unique_id())
 	GameManager.current_player = multiplayer.get_unique_id()
 	print("Server is live, waiting for players")
 
