@@ -40,6 +40,10 @@ func _physics_process(delta: float) -> void:
 	if not timer.is_stopped():
 		return
 		
+	# Skip movement processing if the player is dead
+	if is_dead:
+		return
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
