@@ -61,7 +61,11 @@ Now you can start using Godot 4 for game development!
 
 ## Running the tests
 
-No tests developed yet.
+Open the project (project.godot) and press the button called "Ejecucion rapida de escena" (right & up side of the screen). After that, you can choose the scene to execute, look for the ones that end with the word "tests".
+
+- enemy_tests (.tscn & .gd)
+- player_tests (.tscn & .gd)
+
 
 ## Built With
 * [GODOT 4](https://godotengine.org/download)
