@@ -9,9 +9,9 @@
 script = ExtResource("1_2e2cq")
 PlayerScene = ExtResource("1_uwi1m")
 
-[node name="Level1" parent="." instance=ExtResource("2_d4303")]
+[node name="Level" parent="." instance=ExtResource("2_d4303")]
 
-[node name="Warrior" parent="Level1" instance=ExtResource("4_7p0om")]
+[node name="Warrior" parent="Level" instance=ExtResource("4_7p0om")]
 
 [node name="SpawnLocation" type="Node2D" parent="."]
 
@@ -20,3 +20,6 @@ position = Vector2(64, 48)
 
 [node name="1" type="Node2D" parent="SpawnLocation" groups=["PlayerSpawnPoint"]]
 position = Vector2(-56, 48)
+
+[connection signal="level_compleated" from="Level" to="." method="_on_level_1_level_compleated"]
+[connection signal="level_compleated" from="Level" to="." method="_on_level_level_compleated"]
