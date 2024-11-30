@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xo3eircuwbda"]
+[gd_scene load_steps=21 format=3 uid="uid://xo3eircuwbda"]
 
 [ext_resource type="Script" path="res://scripts/player_character_body_2d.gd" id="1_v464x"]
 [ext_resource type="Texture2D" uid="uid://cx333qe5qopm" path="res://assets/textures/player1/_Idle.png" id="2_ovgkg"]
@@ -572,6 +572,11 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="LabelSettings" id="LabelSettings_xc5oy"]
+font_color = Color(0.88446, 0.081278, 1.92523e-07, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xniu1"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yl5g"]
 size = Vector2(26, 40)
 
@@ -615,19 +620,24 @@ replication_config = SubResource("SceneReplicationConfig_0nmdg")
 
 [node name="ContinuesLabel" type="Label" parent="."]
 offset_left = 19.0
-offset_top = -68.0
+offset_top = -67.0
 offset_right = 41.0
-offset_bottom = -45.0
+offset_bottom = -44.0
 scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_xc5oy")
 
 [node name="HealthProgressBar" type="ProgressBar" parent="."]
 offset_left = -17.0
-offset_top = -69.0
+offset_top = -67.0
 offset_right = 53.0
-offset_bottom = -42.0
+offset_bottom = -44.0
 scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxTexture_xniu1")
 max_value = 50.0
-show_percentage = false
+value = 50.0
+rounded = true
+allow_greater = true
+allow_lesser = true
 
 [node name="Name" type="Label" parent="."]
 offset_left = -24.0
