@@ -1,6 +1,6 @@
 extends Node
 
-const PLAYER_SCENE = "res://player_character_body_2d.tscn"
+const PLAYER_SCENE = "res://scenes/Player/player_character_body_2d.tscn"
 
 var player: Player
 

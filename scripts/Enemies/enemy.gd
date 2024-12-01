@@ -68,7 +68,7 @@ func _on_direction_timer_timeout():
 	if curr_state == State.ROAMING:
 		direction = choose([Vector2.LEFT, Vector2.RIGHT, Vector2.ZERO])
 		velocity.x = 0
-		
+
 func handle_animation():
 	if curr_state == State.DEAD:
 		return

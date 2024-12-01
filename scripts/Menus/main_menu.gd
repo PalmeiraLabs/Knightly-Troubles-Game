@@ -9,7 +9,7 @@ extends Node2D
 @onready var ip_address_line_edit = $IPAdress
 
 # The scene file to be loaded when starting the game
-const INITIAL_SCENE = "res://world.tscn"
+const INITIAL_SCENE = "res://scenes/world.tscn"
 
 # Server IP for LAN connection
 @export var address = "" 
