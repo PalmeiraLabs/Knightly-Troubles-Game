@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctor6yldedycj"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_t503g"]
+[ext_resource type="Script" path="res://scripts/Menus/main_menu.gd" id="1_t503g"]
 [ext_resource type="AudioStream" uid="uid://cn6w2b5756mbr" path="res://resources/music/Intro Theme.mp3" id="2_b6b2o"]
 
 [sub_resource type="Gradient" id="Gradient_usah1"]

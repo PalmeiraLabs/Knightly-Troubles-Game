@@ -1,7 +1,7 @@
 extends Node
 
 const ENEMY_SCENE = "res://scenes/Enemies/enemy.tscn"
-const MOCK_PLAYER_SCENE = "res://player_character_body_2d.tscn"
+const MOCK_PLAYER_SCENE = "res://scenes/Player/player_character_body_2d.tscn"
 
 var enemy: Enemy
 var mock_player: CharacterBody2D

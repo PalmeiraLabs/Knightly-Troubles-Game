@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-const GAME_OVER_SCENE = "res://scenes/game_over.tscn"
+const GAME_OVER_SCENE = "res://scenes/Menus/game_over.tscn"
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
