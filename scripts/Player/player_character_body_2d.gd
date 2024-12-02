@@ -28,6 +28,7 @@ signal player_freed
 @onready var timer: Timer = $Timer
 @onready var healthProgressBar: ProgressBar = $HealthProgressBar
 @onready var continuesLabel: Label = $ContinuesLabel
+@onready var audioStreamPlayer = $AnimationPlayer/AudioStreamPlayer2D
 
 func _ready():
 	add_to_group("Player")
@@ -133,6 +134,8 @@ func die():
 	
 	is_dead = true
 	
+	_play_death_effect()
+	
 	ap.play("death") #TODO: add animation
 	disable_input()
 	$Camera2D.get_parent().hide()
@@ -182,6 +185,20 @@ func respawn():
 	$Camera2D.get_parent().show()  # Ensure the camera's parent node is visible
 	enable_input()
 	show()
+
+func _play_death_effect():
+	print("Attempting to play death sound effect...")
+	var mp3_stream: AudioStream = load("res://resources/effects/player_dies.mp3")
+	if mp3_stream == null:
+		print("Error: Failed to load audio file.")
+		return
+	if not is_instance_valid(audioStreamPlayer):
+		print("Error: AudioStreamPlayer2D is missing or invalid.")
+		return
+	audioStreamPlayer.stop()  # Ensure any previous sound is stopped
+	audioStreamPlayer.stream = mp3_stream
+	audioStreamPlayer.play()
+	print("Death sound effect played successfully.")
 
 func set_continues_label():
 	self.continuesLabel.text = str(self.continues)
