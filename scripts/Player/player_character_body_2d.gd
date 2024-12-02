@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-const GAME_OVER_SCENE = "res://scenes/game_over.tscn"
+const GAME_OVER_SCENE = "res://scenes/Menus/game_over.tscn"
 
 @export var speed = 300.0
 @export var jump_velocity = -400.0
@@ -26,6 +26,9 @@ signal player_freed
 @onready var cs2D = $Sprite2D/WeaponArea2D/CollisionShape2D
 @onready var weaponArea = $Sprite2D/WeaponArea2D
 @onready var timer: Timer = $Timer
+@onready var healthProgressBar: ProgressBar = $HealthProgressBar
+@onready var continuesLabel: Label = $ContinuesLabel
+@onready var audioStreamPlayer = $AnimationPlayer/AudioStreamPlayer2D
 
 func _ready():
 	add_to_group("Player")
@@ -40,6 +43,13 @@ func _physics_process(delta: float) -> void:
 	if not timer.is_stopped():
 		return
 		
+	if is_dead:
+		return
+		
+	max_health
+	self.set_health_bar()
+	self.set_continues_label()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -110,8 +120,12 @@ func take_damage(amount: int):
 	
 	print("Player: take_damage")
 	health -= amount
+	
+	self.set_health_bar()
+	
 	if health <= 0:
 		health = 0
+		self.set_health_bar()
 		die()
 
 func die():
@@ -120,13 +134,17 @@ func die():
 	
 	is_dead = true
 	
-	ap.play("death") #add animation
+	_play_death_effect()
+	
+	ap.play("death") #TODO: add animation
 	disable_input()
 	$Camera2D.get_parent().hide()
 	print("Player: the player has died! :(")
 	
 	if continues > 0:
 		continues -= 1
+		#self.continuesLabel.text = self.continues as String
+		self.set_continues_label()
 		print("Respawning... Continues left:", continues)
 		await get_tree().create_timer(2.0).timeout
 		respawn()
@@ -167,6 +185,26 @@ func respawn():
 	$Camera2D.get_parent().show()  # Ensure the camera's parent node is visible
 	enable_input()
 	show()
+
+func _play_death_effect():
+	print("Attempting to play death sound effect...")
+	var mp3_stream: AudioStream = load("res://resources/effects/player_dies.mp3")
+	if mp3_stream == null:
+		print("Error: Failed to load audio file.")
+		return
+	if not is_instance_valid(audioStreamPlayer):
+		print("Error: AudioStreamPlayer2D is missing or invalid.")
+		return
+	audioStreamPlayer.stop()  # Ensure any previous sound is stopped
+	audioStreamPlayer.stream = mp3_stream
+	audioStreamPlayer.play()
+	print("Death sound effect played successfully.")
+
+func set_continues_label():
+	self.continuesLabel.text = str(self.continues)
+
+func set_health_bar():
+	self.healthProgressBar.value = self.health
 
 func _on_area_entered(area):
 	print("Player: _on_area_entered")

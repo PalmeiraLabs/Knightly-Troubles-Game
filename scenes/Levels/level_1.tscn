@@ -1,21 +1,12 @@
-[gd_scene load_steps=17 format=4 uid="uid://m2750tcdrvwy"]
+[gd_scene load_steps=8 format=4 uid="uid://m2750tcdrvwy"]
 
-[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_8kvda"]
+[ext_resource type="Script" path="res://scripts/Levels/level_1.gd" id="1_8kvda"]
 [ext_resource type="TileSet" uid="uid://7i4vmnpptjru" path="res://resources/TileSets/tiles.tres" id="1_pbo4c"]
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_0m278"]
 [ext_resource type="AudioStream" uid="uid://bu1ubd8t3mogx" path="res://resources/music/Dungeon Theme.mp3" id="4_3d0ew"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="4_m1lmy"]
-[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/level_transition.tscn" id="6_fetbp"]
-[ext_resource type="PackedScene" uid="uid://dnbrlmby5nq64" path="res://scenes/level_2.tscn" id="7_u8rqo"]
-[ext_resource type="PackedScene" uid="uid://b3owxe6is5t07" path="res://scenes/Enemies/skeleton.tscn" id="8_y74w3"]
-[ext_resource type="Texture2D" uid="uid://c14gg3mg4mlli" path="res://assets/textures/Decorations/flag_blue.png" id="9_16o5l"]
-[ext_resource type="Texture2D" uid="uid://7lda00sb6jsk" path="res://assets/textures/Decorations/crate_3_damaged.png" id="10_kpj1w"]
-[ext_resource type="Texture2D" uid="uid://yn6maire8tbt" path="res://assets/textures/Decorations/crate_2.png" id="11_bbq04"]
-[ext_resource type="Texture2D" uid="uid://8i442quhlo3m" path="res://assets/textures/Decorations/bag_1.png" id="12_wwcic"]
-[ext_resource type="Texture2D" uid="uid://dw5ain0iftbam" path="res://assets/textures/Decorations/axe.png" id="13_cawt7"]
-[ext_resource type="Texture2D" uid="uid://daf86yhl3itu" path="res://assets/textures/Decorations/chair_1.png" id="14_jsvuh"]
-[ext_resource type="Texture2D" uid="uid://c5e02jltodx2y" path="res://assets/textures/Decorations/bookshelf_1.png" id="15_fhemg"]
-[ext_resource type="PackedScene" uid="uid://dek4u1rb2wp40" path="res://scenes/Enemies/warrior.tscn" id="16_wfjlg"]
+[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="6_fetbp"]
+[ext_resource type="PackedScene" uid="uid://dnbrlmby5nq64" path="res://scenes/Levels/level_2.tscn" id="7_u8rqo"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_8kvda")
@@ -55,6 +46,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="LevelTransition" parent="." instance=ExtResource("6_fetbp")]
+<<<<<<< HEAD:scenes/level_1.tscn
 position = Vector2(4800, 0)
 next_level = ExtResource("7_u8rqo")
 
@@ -123,4 +115,9 @@ position = Vector2(3944, -80)
 [node name="Warrior2" parent="." instance=ExtResource("16_wfjlg")]
 position = Vector2(3736, -80)
 
+=======
+position = Vector2(1800, -8)
+next_level = ExtResource("7_u8rqo")
+
+>>>>>>> develop:scenes/Levels/level_1.tscn
 [connection signal="level_compleated" from="LevelTransition" to="." method="_on_level_transition_level_compleated"]
