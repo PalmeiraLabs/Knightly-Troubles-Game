@@ -16,7 +16,7 @@ var continues := 2
 var is_dead_forever := false
 var is_dead := false
 
-# Default Player spawn position
+# Default Player spawn position (after dying)
 var spawn_point: Vector2 = Vector2(100, 100)  
 
 signal player_freed
@@ -35,30 +35,29 @@ func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	timer.connect("timeout", Callable(self, "_on_timeout"))
 
-#To make it move.
+#To make the player move
 func _physics_process(delta: float) -> void:
 	if !$MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		return
-	
+
 	if not timer.is_stopped():
 		return
-		
+
 	if is_dead:
 		return
-		
-	max_health
+
 	self.set_health_bar()
 	self.set_continues_label()
-	
-	# Add the gravity.
+
+	# Add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
+	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
-	
-	# Get the input direction and handle the movement/deceleration.
+
+	# Get the input direction and handle the movement/deceleration
 	var horizontal_direction := Input.get_axis("move_left", "move_right")
 	if horizontal_direction:
 		velocity.x = horizontal_direction * speed
@@ -71,24 +70,49 @@ func _physics_process(delta: float) -> void:
 	update_animations(horizontal_direction)
 
 func update_animations(horizontal_direction):
+	var animation_to_play = ""
+	var flip_h = sprite.flip_h  # Keep track of the current flip state.
+
 	if is_on_floor():
 		if horizontal_direction == 0:
 			if !isAttacking():
-				ap.play("idle")
+				animation_to_play = "idle"
 		else:
 			if !isAttacking():
-				ap.play("run")
+				animation_to_play = "run"
 	else:
 		if velocity.y < 0:
 			if !isAttacking():
-				ap.play("jump")
+				animation_to_play = "jump"
 		elif velocity.y > 0:
 			if !isAttacking():
-				ap.play("fall")
-				
+				animation_to_play = "fall"
+
 	if Input.is_action_just_pressed("attack") and is_on_floor():
-		ap.play("attack")
+		animation_to_play = "attack"
 		start_action_cooldown()
+
+	if horizontal_direction != 0:
+		flip_h = horizontal_direction == -1
+
+	if animation_to_play != "" or sprite.flip_h != flip_h:
+		# Send the animation and flip state to the other peer
+		rpc("set_animation_and_flip", animation_to_play, flip_h)
+		# Apply the animation locally 
+		if animation_to_play != "":
+			ap.play(animation_to_play)
+		sprite.flip_h = flip_h
+
+@rpc("call_remote", "any_peer", "reliable")
+func set_animation_and_flip(animation_name: String, flip_h: bool):
+	# Synchronize animation and the flip state
+	if ap.current_animation != animation_name:
+		ap.play(animation_name)
+	sprite.flip_h = flip_h
+
+@rpc("call_remote", "any_peer", "reliable")
+func set_animation(animation_name: String):
+	ap.play(animation_name)
 
 func isAttacking():
 	return ap.current_animation == "attack"
@@ -107,22 +131,22 @@ func enable_input():
 
 func _on_timeout():
 	enable_input()
-	
+
 func deactivate_camara():
 	$Camera2D.enabled = false
-	
+
 func add_name(name):
 	$Name.text = name
-	
+
 func take_damage(amount: int):
 	if is_dead:
 		return
 	
 	print("Player: take_damage")
+
 	health -= amount
-	
 	self.set_health_bar()
-	
+
 	if health <= 0:
 		health = 0
 		self.set_health_bar()
@@ -131,26 +155,26 @@ func take_damage(amount: int):
 func die():
 	if is_dead_forever or is_dead:
 		return
-	
+
 	is_dead = true
 	
 	_play_death_effect()
 	
-	ap.play("death") #TODO: add animation
+	#TODO: add animation
+	#ap.play("death") 
+
 	disable_input()
 	$Camera2D.get_parent().hide()
-	print("Player: the player has died! :(")
-	
+
 	if continues > 0:
 		continues -= 1
-		#self.continuesLabel.text = self.continues as String
 		self.set_continues_label()
 		print("Respawning... Continues left:", continues)
 		await get_tree().create_timer(2.0).timeout
 		respawn()
 	else:
 		print("Game Over: No continues left!")
-		emit_signal("player_freed") 
+		emit_signal("player_freed")
 		is_dead_forever = true
 		remove_player()
 		addScene(GAME_OVER_SCENE)
@@ -159,43 +183,41 @@ func remove_player():
 	print("Removing player" )
 	queue_free()
 
-func add_game_over_scene():
-	var scene = load(GAME_OVER_SCENE).instantiate()
-	get_tree().get_root().add_child(scene)
-	hide()
-
 func addScene(sceneName):
 	if $MultiplayerSynchronizer.is_multiplayer_authority():
 		var scene = load(sceneName).instantiate()
 		get_tree().root.add_child(scene)
 		self.hide()
 
-func hide_all_except(except_node_name: String):
-	var root = get_tree().get_root()
-	for child in root.get_children():
-		if child.name != except_node_name and child is CanvasItem:
-			child.visible = false
-
 func respawn():
 	print("Player: Respawning...")
 	is_dead = false
 	health = max_health
 	position = spawn_point
-	$Camera2D.make_current()  # Detach the camera
-	$Camera2D.get_parent().show()  # Ensure the camera's parent node is visible
+	
+	# Detach the camera
+	$Camera2D.make_current()  
+	# Ensure that the camera's parent node is visible
+	$Camera2D.get_parent().show()
+	
 	enable_input()
 	show()
 
 func _play_death_effect():
 	print("Attempting to play death sound effect...")
 	var mp3_stream: AudioStream = load("res://resources/effects/player_dies.mp3")
+
 	if mp3_stream == null:
 		print("Error: Failed to load audio file.")
 		return
+
 	if not is_instance_valid(audioStreamPlayer):
 		print("Error: AudioStreamPlayer2D is missing or invalid.")
 		return
-	audioStreamPlayer.stop()  # Ensure any previous sound is stopped
+		
+	# Ensure any previous sound is stopped
+	audioStreamPlayer.stop()
+
 	audioStreamPlayer.stream = mp3_stream
 	audioStreamPlayer.play()
 	print("Death sound effect played successfully.")
