@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_0m278"]
 [ext_resource type="AudioStream" uid="uid://bu1ubd8t3mogx" path="res://resources/music/Dungeon Theme.mp3" id="4_3d0ew"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="4_m1lmy"]
-[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="6_fetbp"]
+[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/level_transition.tscn" id="6_fetbp"]
 [ext_resource type="PackedScene" uid="uid://dnbrlmby5nq64" path="res://scenes/Levels/level_2.tscn" id="7_u8rqo"]
 
 [node name="Level1" type="Node2D"]
@@ -46,78 +46,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="LevelTransition" parent="." instance=ExtResource("6_fetbp")]
-<<<<<<< HEAD:scenes/level_1.tscn
 position = Vector2(4800, 0)
 next_level = ExtResource("7_u8rqo")
 
-[node name="Skeleton" parent="." instance=ExtResource("8_y74w3")]
-position = Vector2(2496, 16)
-
-[node name="Decorations" type="Node" parent="."]
-
-[node name="FlagBlue" type="Sprite2D" parent="Decorations"]
-position = Vector2(2344, -16)
-scale = Vector2(0.710526, 0.619403)
-texture = ExtResource("9_16o5l")
-
-[node name="FlagBlue2" type="Sprite2D" parent="Decorations"]
-position = Vector2(2592, -16)
-scale = Vector2(0.710526, 0.619403)
-texture = ExtResource("9_16o5l")
-
-[node name="Crate3Damaged" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(1360, -40)
-texture = ExtResource("10_kpj1w")
-
-[node name="Crate2" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(1296, -56)
-texture = ExtResource("11_bbq04")
-
-[node name="Bag1" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(1120, 24)
-texture = ExtResource("12_wwcic")
-
-[node name="Axe" type="Sprite2D" parent="Decorations"]
-position = Vector2(208, -56)
-texture = ExtResource("13_cawt7")
-
-[node name="Axe2" type="Sprite2D" parent="Decorations"]
-position = Vector2(152, -56)
-scale = Vector2(-1.00561, 1.01527)
-texture = ExtResource("13_cawt7")
-
-[node name="Chair1" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(944, 88)
-texture = ExtResource("14_jsvuh")
-
-[node name="Bookshelf1" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(1688, 0)
-texture = ExtResource("15_fhemg")
-
-[node name="FlagBlue3" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(24, -48)
-texture = ExtResource("9_16o5l")
-
-[node name="FlagBlue4" type="Sprite2D" parent="Decorations"]
-z_index = -1
-position = Vector2(344, -48)
-texture = ExtResource("9_16o5l")
-
-[node name="Warrior" parent="." instance=ExtResource("16_wfjlg")]
-position = Vector2(3944, -80)
-
-[node name="Warrior2" parent="." instance=ExtResource("16_wfjlg")]
-position = Vector2(3736, -80)
-
-=======
-position = Vector2(1800, -8)
-next_level = ExtResource("7_u8rqo")
-
->>>>>>> develop:scenes/Levels/level_1.tscn
 [connection signal="level_compleated" from="LevelTransition" to="." method="_on_level_transition_level_compleated"]
