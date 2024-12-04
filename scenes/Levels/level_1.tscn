@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_0m278"]
 [ext_resource type="AudioStream" uid="uid://bu1ubd8t3mogx" path="res://resources/music/Dungeon Theme.mp3" id="4_3d0ew"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="4_m1lmy"]
-[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="6_fetbp"]
+[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="6_p5tem"]
 [ext_resource type="PackedScene" uid="uid://dnbrlmby5nq64" path="res://scenes/Levels/level_2.tscn" id="7_u8rqo"]
 
 [node name="Level1" type="Node2D"]
@@ -44,7 +44,7 @@ stream = ExtResource("4_3d0ew")
 volume_db = -20.0
 autoplay = true
 
-[node name="LevelTransition" parent="." instance=ExtResource("6_fetbp")]
+[node name="LevelTransition" parent="." instance=ExtResource("6_p5tem")]
 position = Vector2(1800, -8)
 next_level = ExtResource("7_u8rqo")
 
