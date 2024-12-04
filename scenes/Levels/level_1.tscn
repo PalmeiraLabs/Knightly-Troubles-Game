@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://m2750tcdrvwy"]
+[gd_scene load_steps=10 format=4 uid="uid://m2750tcdrvwy"]
 
 [ext_resource type="Script" path="res://scripts/Levels/level_1.gd" id="1_8kvda"]
 [ext_resource type="TileSet" uid="uid://7i4vmnpptjru" path="res://resources/TileSets/tiles.tres" id="1_pbo4c"]
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_0m278"]
 [ext_resource type="AudioStream" uid="uid://bu1ubd8t3mogx" path="res://resources/music/Dungeon Theme.mp3" id="4_3d0ew"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="4_m1lmy"]
-[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/level_transition.tscn" id="6_fetbp"]
+[ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="6_fetbp"]
 [ext_resource type="PackedScene" uid="uid://dnbrlmby5nq64" path="res://scenes/Levels/level_2.tscn" id="7_u8rqo"]
+[ext_resource type="PackedScene" uid="uid://c5uljansh1r3j" path="res://scenes/Levels/kill_trigger.tscn" id="8_205a0"]
+[ext_resource type="PackedScene" uid="uid://b3owxe6is5t07" path="res://scenes/Enemies/skeleton.tscn" id="9_pyblh"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_8kvda")
@@ -48,5 +50,15 @@ autoplay = true
 [node name="LevelTransition" parent="." instance=ExtResource("6_fetbp")]
 position = Vector2(4800, 0)
 next_level = ExtResource("7_u8rqo")
+
+[node name="KillTrigger" parent="." instance=ExtResource("8_205a0")]
+position = Vector2(2056, 376)
+scale = Vector2(130.92, 4)
+
+[node name="Skeleton" parent="." instance=ExtResource("9_pyblh")]
+position = Vector2(3920, -88)
+
+[node name="Skeleton2" parent="." instance=ExtResource("9_pyblh")]
+position = Vector2(2456, 8)
 
 [connection signal="level_compleated" from="LevelTransition" to="." method="_on_level_transition_level_compleated"]

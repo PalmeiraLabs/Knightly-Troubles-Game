@@ -1,17 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dx4q4ytaxjogt"]
+[gd_scene load_steps=4 format=3 uid="uid://dx4q4ytaxjogt"]
 
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="1_2e2cq"]
 [ext_resource type="PackedScene" uid="uid://xo3eircuwbda" path="res://scenes/Player/player_character_body_2d.tscn" id="1_uwi1m"]
 [ext_resource type="PackedScene" uid="uid://m2750tcdrvwy" path="res://scenes/Levels/level_1.tscn" id="2_d4303"]
-[ext_resource type="PackedScene" uid="uid://dek4u1rb2wp40" path="res://scenes/Enemies/warrior.tscn" id="4_7p0om"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_2e2cq")
 PlayerScene = ExtResource("1_uwi1m")
 
 [node name="Level" parent="." instance=ExtResource("2_d4303")]
-
-[node name="Warrior" parent="Level" instance=ExtResource("4_7p0om")]
 
 [node name="SpawnLocation" type="Node2D" parent="."]
 
