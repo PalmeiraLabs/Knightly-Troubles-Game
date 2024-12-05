@@ -47,8 +47,8 @@ stream = ExtResource("4_3d0ew")
 volume_db = -20.0
 autoplay = true
 
-[node name="LevelTransition" parent="." instance=ExtResource("6_fetbp")]
-position = Vector2(4800, 0)
+[node name="LevelTransition" parent="." instance=ExtResource("6_p5tem")]
+position = Vector2(4776, 0)
 next_level = ExtResource("7_u8rqo")
 
 [node name="KillTrigger" parent="." instance=ExtResource("8_205a0")]
