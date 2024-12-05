@@ -139,18 +139,25 @@ func add_name(name):
 	$Name.text = name
 
 func take_damage(amount: int):
+	print("Player taking damage...")
 	if is_dead:
 		return
 	
-	print("Player: take_damage")
-
 	health -= amount
-	self.set_health_bar()
-
-	if health <= 0:
+	if health < 0:
 		health = 0
-		self.set_health_bar()
+
+	# Synchronize the player health across the network
+	rpc("update_health", health)
+
+	if health == 0:
 		die()
+		
+# Update the player health and refresh the UI for all the peers
+@rpc("call_remote", "any_peer", "reliable")
+func update_health(new_health: int):
+	health = new_health
+	set_health_bar()
 
 func die():
 	if is_dead_forever or is_dead:
