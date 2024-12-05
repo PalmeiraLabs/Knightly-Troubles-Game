@@ -144,20 +144,14 @@ func take_damage(amount: int):
 		return
 	
 	health -= amount
-	if health < 0:
-		health = 0
+	health = max(0, health)
 
 	# Synchronize the player health across the network
-	rpc("update_health", health)
+	rpc("sync_health", health)  # Sync health across peers
+	set_health_bar()
 
 	if health == 0:
 		die()
-		
-# Update the player health and refresh the UI for all the peers
-@rpc("call_remote", "any_peer", "reliable")
-func update_health(new_health: int):
-	health = new_health
-	set_health_bar()
 
 func die():
 	if is_dead_forever or is_dead:
@@ -167,8 +161,8 @@ func die():
 	
 	_play_death_effect()
 	
-	#TODO: add animation
-	#ap.play("death") 
+	# Play death effect and wait for it to finish
+	await _play_death_animation()
 
 	disable_input()
 	$Camera2D.get_parent().hide()
@@ -198,17 +192,27 @@ func addScene(sceneName):
 
 func respawn():
 	print("Player: Respawning...")
+
 	is_dead = false
 	health = max_health
+	rpc("sync_health", health)  # Sync health to all peers
+	set_health_bar()
+
+	# Reset position and other state
 	position = spawn_point
 	
+	sprite.visible = true
+	sprite.modulate = Color(1, 1, 1, 1)  # Reset to fully visible
+	
 	# Detach the camera
-	$Camera2D.make_current()  
+	$Camera2D.make_current()
+	
 	# Ensure that the camera's parent node is visible
 	$Camera2D.get_parent().show()
-	
+
 	enable_input()
 	show()
+	#ap.play("idle")
 
 func _play_death_effect():
 	print("Attempting to play death sound effect...")
@@ -237,3 +241,14 @@ func set_health_bar():
 
 func _on_area_entered(area):
 	print("Player: _on_area_entered")
+
+@rpc("any_peer", "reliable")
+func sync_health(new_health):
+	health = new_health
+	set_health_bar()
+
+func _play_death_animation():
+	for i in range(100):
+		sprite.modulate.a = 1.0 - (i / 100.0)  # Gradually fade out
+		await get_tree().create_timer(0.02).timeout  # Delay for smooth transition
+	sprite.visible = false
