@@ -94,13 +94,7 @@ func handle_animation():
 	
 	if curr_state == State.HURT and !in_hurt_animation:
 		if health < health_min:
-			curr_state = State.DEAD
-			anim_sprite.play("death")
-			in_hurt_animation = true
-			await get_tree().create_timer(1.4).timeout
-			in_hurt_animation = false
-			self.set_visible(false)
-			self.queue_free()
+			die.rpc()
 		
 		health = health - 1
 		anim_sprite.play("hit")
@@ -139,3 +133,15 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func get_movement_animation() -> String:
 	return "walk"
+	
+@rpc("any_peer","call_local")
+func die():
+	var anim_sprite = $AnimatedSprite2D
+	curr_state = State.DEAD
+	anim_sprite.play("death")
+	in_hurt_animation = true
+	await get_tree().create_timer(1.4).timeout
+	in_hurt_animation = false
+	self.set_visible(false)
+	self.queue_free()
+	
