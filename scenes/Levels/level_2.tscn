@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dnbrlmby5nq64"]
+[gd_scene load_steps=15 format=4 uid="uid://dnbrlmby5nq64"]
 
 [ext_resource type="TileSet" uid="uid://7i4vmnpptjru" path="res://resources/TileSets/tiles.tres" id="1_cvw74"]
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_vxt88"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dek4u1rb2wp40" path="res://scenes/Enemies/warrior.tscn" id="5_apwjf"]
 [ext_resource type="PackedScene" uid="uid://b3owxe6is5t07" path="res://scenes/Enemies/skeleton.tscn" id="6_motlp"]
 [ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="7_dppwq"]
+[ext_resource type="PackedScene" uid="uid://cepup6e6au6xu" path="res://scenes/Menus/game_over.tscn" id="8_f6rfl"]
 [ext_resource type="Texture2D" uid="uid://djp46lebqvint" path="res://assets/textures/Decorations/books.png" id="8_r741d"]
 [ext_resource type="Texture2D" uid="uid://c5e02jltodx2y" path="res://assets/textures/Decorations/bookshelf_1.png" id="9_g0g0n"]
 [ext_resource type="Texture2D" uid="uid://c14gg3mg4mlli" path="res://assets/textures/Decorations/flag_blue.png" id="10_cfai3"]
@@ -61,6 +62,7 @@ position = Vector2(1144, -56)
 [node name="LevelTransition" parent="." instance=ExtResource("7_dppwq")]
 z_index = -1
 position = Vector2(2368, 576)
+next_level = ExtResource("8_f6rfl")
 
 [node name="Decorations" type="Node" parent="."]
 
