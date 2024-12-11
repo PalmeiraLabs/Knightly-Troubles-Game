@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://dnbrlmby5nq64"]
+[gd_scene load_steps=16 format=4 uid="uid://dnbrlmby5nq64"]
 
+[ext_resource type="Script" path="res://scripts/Levels/level_2.gd" id="1_8npsi"]
 [ext_resource type="TileSet" uid="uid://7i4vmnpptjru" path="res://resources/TileSets/tiles.tres" id="1_cvw74"]
 [ext_resource type="Texture2D" uid="uid://s4e4ndtmxw82" path="res://assets/textures/Background/layer_1.png" id="2_vxt88"]
 [ext_resource type="Texture2D" uid="uid://bwy8m0gy1ub6q" path="res://assets/textures/Background/layer_2.png" id="3_52lvm"]
@@ -16,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dgwtvb2biqd74" path="res://assets/textures/Decorations/crate_3.png" id="13_2jn55"]
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_8npsi")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -1
@@ -100,3 +102,5 @@ texture = ExtResource("12_772vk")
 z_index = -1
 position = Vector2(1808, -8)
 texture = ExtResource("13_2jn55")
+
+[connection signal="level_compleated" from="LevelTransition" to="." method="_on_level_transition_level_compleated"]
