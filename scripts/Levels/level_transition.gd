@@ -11,6 +11,8 @@ func _on_area_2d_body_entered(body):
 func add_name(player_name):
 	players_ready[player_name] = null
 	if players_ready.size() == GameManager.players.size():
+		print("DEBUG: Level transition...")
+		print("DEBUG: next level path: ", next_level.get_path())
 		level_compleated.emit(next_level.get_path())
 		
 
