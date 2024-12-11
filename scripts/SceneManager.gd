@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var PlayerScene : PackedScene
+const GAME_ENDING_SCENE = "res://scenes/Menus/game_ending.tscn"
 
 signal level_compleated(level_name)
 
@@ -23,12 +24,10 @@ func set_player_spawns():
 			if spawn.name == str(index):
 				current_player.global_position = spawn.global_position
 		index += 1
-		
-
-
 
 func _on_level_level_compleated(level_name):
-	change_level(level_name)
+	if level_name != GAME_ENDING_SCENE:
+		change_level(level_name)
 	
 	
 func change_level(next_level_name):

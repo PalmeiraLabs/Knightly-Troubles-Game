@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dek4u1rb2wp40" path="res://scenes/Enemies/warrior.tscn" id="5_apwjf"]
 [ext_resource type="PackedScene" uid="uid://b3owxe6is5t07" path="res://scenes/Enemies/skeleton.tscn" id="6_motlp"]
 [ext_resource type="PackedScene" uid="uid://ct66crv37a0vn" path="res://scenes/Levels/level_transition.tscn" id="7_dppwq"]
-[ext_resource type="PackedScene" uid="uid://cepup6e6au6xu" path="res://scenes/Menus/game_over.tscn" id="8_f6rfl"]
 [ext_resource type="Texture2D" uid="uid://djp46lebqvint" path="res://assets/textures/Decorations/books.png" id="8_r741d"]
+[ext_resource type="PackedScene" uid="uid://cepup6e6au6xu" path="res://scenes/Menus/game_ending.tscn" id="9_8wdar"]
 [ext_resource type="Texture2D" uid="uid://c5e02jltodx2y" path="res://assets/textures/Decorations/bookshelf_1.png" id="9_g0g0n"]
 [ext_resource type="Texture2D" uid="uid://c14gg3mg4mlli" path="res://assets/textures/Decorations/flag_blue.png" id="10_cfai3"]
 [ext_resource type="Texture2D" uid="uid://b83u4syvqrows" path="res://assets/textures/Decorations/curtain_blue_1.png" id="11_xjrxv"]
@@ -64,7 +64,7 @@ position = Vector2(1144, -56)
 [node name="LevelTransition" parent="." instance=ExtResource("7_dppwq")]
 z_index = -1
 position = Vector2(2368, 576)
-next_level = ExtResource("8_f6rfl")
+next_level = ExtResource("9_8wdar")
 
 [node name="Decorations" type="Node" parent="."]
 
