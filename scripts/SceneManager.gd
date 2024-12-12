@@ -38,6 +38,9 @@ func change_level(next_level_name):
 	var next_level = load(next_level_name).instantiate()
 	next_level.name = "Level"
 	add_child(next_level)
+	
+	if "level_compleated" in next_level:
+		next_level.level_compleated.connect(_on_level_level_compleated)
 
 	# Moves players to the start of the level
 	var index = 0
