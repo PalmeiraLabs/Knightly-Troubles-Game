@@ -27,8 +27,10 @@ func set_player_spawns():
 
 func _on_level_level_compleated(level_name):
 	if level_name != GAME_ENDING_SCENE:
+		print("DEBUG: level_name != GAME_ENDING_SCENE in SceneManager... Level name: ", level_name)
 		change_level(level_name)
-	
+	else:
+		print("DEBUG: level_name == GAME_ENDING_SCENE in SceneManager & do nothing... Level name: ", level_name)
 	
 func change_level(next_level_name):
 	# Removes previous level
