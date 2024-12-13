@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bedy32pm1uylu" path="res://resources/backgrounds/death_background.jpeg" id="1_547cl"]
 
 [sub_resource type="FontFile" id="FontFile_7qnyw"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
