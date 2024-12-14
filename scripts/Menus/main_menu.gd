@@ -64,8 +64,13 @@ func peer_connected(id):
 # Called when a player disconnects from the server
 # The id parameter is the unique identifier of the disconnected peer (player)
 func peer_disconnected(id):
-	self.disable_button(button_play)
-	print("Player Disconnected: " + str(id))
+	var world_scene = get_node("/root/World")
+	if world_scene:
+		world_scene.queue_free()
+		GameManager.players.erase(id)
+		get_tree().reload_current_scene()
+	#self.disable_button(button_play)
+	#print("Player Disconnected: " + str(id))
 
 # Called only on the client when it successfully connects to the server
 func connected_to_server():
@@ -165,3 +170,7 @@ func _on_default_port_button_pressed() -> void:
 	var portNumber = "8900"
 	self.port = int(portNumber)
 	self.port_number_line_edit.text = portNumber
+	
+
+func _on_tree_exiting():
+	peer.close()
