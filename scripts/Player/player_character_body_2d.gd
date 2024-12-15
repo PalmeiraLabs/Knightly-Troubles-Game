@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	if not timer.is_stopped():
 		return
 
-	if is_dead:
+	if is_dead or is_dead_forever:
 		return
 
 	self.set_health_bar()
@@ -175,19 +175,23 @@ func die():
 		respawn()
 	else:
 		print("DEBUG: Else condition.. player die! ...")
-		self.present_game_over_scene.rpc()
+		present_game_over_scene.rpc()
 
 @rpc("any_peer","call_local")
 func present_game_over_scene():
+	get_tree().call_group("players", "kill_all_players")
+	
+func kill_all_players():
 	print("Game Over: No continues left!")
 	emit_signal("player_freed")
 	is_dead_forever = true
 	remove_player()
 	addScene(GAME_OVER_SCENE)
 	
+	
 func remove_player():
 	print("Removing player" )
-	queue_free()
+	self.queue_free()
 
 func addScene(sceneName):
 	if $MultiplayerSynchronizer.is_multiplayer_authority():
