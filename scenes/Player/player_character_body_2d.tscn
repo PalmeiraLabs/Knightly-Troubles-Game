@@ -580,7 +580,7 @@ font_color = Color(0.88446, 0.081278, 1.92523e-07, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yl5g"]
 size = Vector2(26, 40)
 
-[node name="PlayerCharacterBody2D" type="CharacterBody2D"]
+[node name="PlayerCharacterBody2D" type="CharacterBody2D" groups=["players"]]
 collision_layer = 2
 script = ExtResource("1_t3gjj")
 

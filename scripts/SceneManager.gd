@@ -13,6 +13,7 @@ func set_player_spawns():
 	var index = 0
 	for i in GameManager.players:
 		var current_player = PlayerScene.instantiate()
+		current_player.add_to_group("players")
 		current_player.name = str(GameManager.players[i].id)
 		current_player.add_name(GameManager.players[i].name)
 		add_child(current_player)
