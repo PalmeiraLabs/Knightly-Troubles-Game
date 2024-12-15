@@ -174,12 +174,17 @@ func die():
 		await get_tree().create_timer(2.0).timeout
 		respawn()
 	else:
-		print("Game Over: No continues left!")
-		emit_signal("player_freed")
-		is_dead_forever = true
-		remove_player()
-		addScene(GAME_OVER_SCENE)
+		print("DEBUG: Else condition.. player die! ...")
+		self.present_game_over_scene.rpc()
 
+@rpc("any_peer","call_local")
+func present_game_over_scene():
+	print("Game Over: No continues left!")
+	emit_signal("player_freed")
+	is_dead_forever = true
+	remove_player()
+	addScene(GAME_OVER_SCENE)
+	
 func remove_player():
 	print("Removing player" )
 	queue_free()
