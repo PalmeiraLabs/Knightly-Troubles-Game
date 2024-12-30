@@ -4,8 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://cn6w2b5756mbr" path="res://resources/music/Intro Theme.mp3" id="2_b6b2o"]
 
 [sub_resource type="Gradient" id="Gradient_usah1"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.222116, 0.85516, 0.541697, 1)
+offsets = PackedFloat32Array(0.493506)
+colors = PackedColorArray(0.336851, 0.341395, 0.551688, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_i827f"]
 gradient = SubResource("Gradient_usah1")
@@ -14,7 +14,7 @@ gradient = SubResource("Gradient_usah1")
 script = ExtResource("1_t503g")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(312, 176)
+position = Vector2(320, 184)
 scale = Vector2(2.5535, 367.703)
 texture = SubResource("GradientTexture1D_i827f")
 
@@ -24,7 +24,7 @@ offset_top = 32.0
 offset_right = 640.0
 offset_bottom = 93.0
 theme_override_font_sizes/font_size = 30
-text = "Untitled Platformer Game"
+text = "Knightly Troubles"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
