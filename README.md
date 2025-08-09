@@ -72,7 +72,7 @@ Open the project (project.godot) and press the button called "Ejecucion rapida d
 
 ## Versioning
 
-For the versions available, see the following tags: https://github.com/agustinpalmeira/taller2/tags. 
+For the versions available, see the following tags: https://github.com/PalmeiraLabs/Knightly-Troubles-Game/tags.
 
 ## Graphics
 
