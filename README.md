@@ -1,7 +1,7 @@
-# Taller de programación II
+# Knightly-Trouble
 
 ## 1. Description
-Our project involves the development of a two-player platform game using the Godot engine. The game will be inspired by classic platformers like Mario Bros, but it won’t be a direct copy. Instead of simply replicating Mario’s experience, we’ll incorporate unique elements.
+Our project involves the development of a two-player platform game using the Godot engine. The game will be inspired by classic platformers like Mario Bros, but it won’t be a direct copy. Instead of simply replicating Mario’s experience, we’ll incorporate unique elements. Can be build for Mac OS, iOS, Android or Windows.
 
 ## 2. Features
 Although our game will have platform mechanics, we aim to create a distinct experience by focusing on the following aspects:
