@@ -28,8 +28,8 @@ The project will include the following macro-level components:
 ## Clone and open project
 * From the Terminal:
 
-	  git clone git@github.com:agustinpalmeira/taller2.git
-	  cd taller2
+	  git clone git@github.com:PalmeiraLabs/Knightly-Troubles-Game.git
+	  cd Knightly-Troubles-Game
 	  open project.godot
 
 The repository can be downloaded via https instead: 
