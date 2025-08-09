@@ -34,7 +34,7 @@ The project will include the following macro-level components:
 
 The repository can be downloaded via https instead: 
 
-	  git clone https://github.com/agustinpalmeira/taller2.git
+	  git clone https://github.com/PalmeiraLabs/Knightly-Troubles-Game.git
 
 ## Installing Godot 4 on macOS
 
